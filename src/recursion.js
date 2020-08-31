@@ -26,16 +26,50 @@ var sum = function(array) {
     return array[0]
   }
 
- return array.pop() + sum(array)
+
+ //return array.pop() + sum(array)
+ //return array[0] + sum(array.slice(1));
+ let [head, ...tail] = array;
+    return head + sum(tail);
+
 };
 
 // 3. Sum all numbers in an array containing nested arrays.
 // arraySum([1,[2,3],[[4]],5]); // 15
 var arraySum = function(array) {
+  var sum = 0;
+  for(var i = 0; i < array.length; i++) {
+    var val = array[i];
+    if(Array.isArray(val)){
+      // if it' an array sum will equal to a sum of values IN an array
+    sum += arraySum(val)
+    } else {
+      //if it's not, add the number to our sum variable.
+       sum += val;
+    }
+  }
+  return sum;
 };
 
 // 4. Check if a number is even.
 var isEven = function(n) {
+   if (n < 0)
+   {
+     n = Math.abs(n);
+   }
+   if (n===0)
+   {
+     return true;
+   }
+   if (n===1)
+   {
+     return false;
+   }
+   else
+   {
+
+     return isEven(n - 2);
+   }
 };
 
 // 5. Sum all integers below a given integer.
